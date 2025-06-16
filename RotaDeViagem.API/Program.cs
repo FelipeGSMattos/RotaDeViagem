@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using RotaDeViagem.API.Configuration;
 using RotaDeViagem.Infra.Data.Context;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RotaDeViagemDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.ResolveDependencies();
 
 
 var app = builder.Build();

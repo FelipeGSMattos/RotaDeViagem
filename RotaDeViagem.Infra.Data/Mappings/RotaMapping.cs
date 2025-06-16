@@ -4,9 +4,9 @@ using RotaDeViagem.Domain.Entities;
 
 namespace RotaDeViagem.Infra.Data.EntityConfig
 {
-    public class RotaConfiguration : IEntityTypeConfiguration<Rota>
+    public class RotaMapping : IEntityTypeConfiguration<Rota>
     {
-        public RotaConfiguration() 
+        public RotaMapping() 
         { 
 
         }
@@ -15,9 +15,9 @@ namespace RotaDeViagem.Infra.Data.EntityConfig
         {
             builder.ToTable("Rotas");
 
-            builder.HasKey(r => r.RotaId);
+            builder.HasKey(r => r.Id);
 
-            builder.Property(r => r.RotaId)
+            builder.Property(r => r.Id)
                 .HasColumnName("RotaId")
                 .ValueGeneratedOnAdd();
 

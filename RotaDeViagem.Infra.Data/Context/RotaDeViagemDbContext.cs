@@ -6,6 +6,10 @@ namespace RotaDeViagem.Infra.Data.Context
 {
     public class RotaDeViagemDbContext : DbContext
     {
+        public RotaDeViagemDbContext()
+        {
+        }
+
         public RotaDeViagemDbContext(DbContextOptions<RotaDeViagemDbContext> options) : base(options)
         {
 
@@ -16,7 +20,7 @@ namespace RotaDeViagem.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new RotaConfiguration());
+            modelBuilder.ApplyConfiguration(new RotaMapping());
         }
     }
 }

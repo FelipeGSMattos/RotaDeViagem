@@ -1,9 +1,7 @@
 ﻿namespace RotaDeViagem.Domain.Entities
 {
-    public class Rota
+    public class Rota : Entity
     {
-        public int RotaId { get; set; }
-
         public required string Origem { get; set; }
 
         public required string Destino { get; set; }

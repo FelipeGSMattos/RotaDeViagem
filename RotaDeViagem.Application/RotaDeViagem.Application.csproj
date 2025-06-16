@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RotaDeViagem.Domain\RotaDeViagem.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

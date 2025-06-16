@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -14,11 +15,10 @@ namespace RotaDeViagem.Infra.Data.Migrations
                 name: "Rotas",
                 columns: table => new
                 {
-                    RotaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Origem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Destino = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    RotaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Origem = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Destino = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
