@@ -17,10 +17,6 @@ namespace RotaDeViagem.Infra.Data.EntityConfig
 
             builder.HasKey(r => r.Id);
 
-            builder.Property(r => r.Id)
-                .HasColumnName("RotaId")
-                .ValueGeneratedOnAdd();
-
             builder.Property(r => r.Origem)
                 .IsRequired()
                 .HasMaxLength(100);

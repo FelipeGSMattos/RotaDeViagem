@@ -84,26 +84,17 @@ namespace RotaDeViagem.API.Controllers
 
             await _rotaApp.Remove(id);
 
-            return Ok("A Rota foi removida");
-            
+            return Ok("A Rota foi removida");           
         }
 
-        //protected ActionResult CustomResponse(object result = null)
-        //{
-        //    if (OperacaoValida())
-        //    {
-        //        return Ok(new
-        //        {
-        //            success = true,
-        //            data = result
-        //        });
-        //    }
+        [HttpGet("melhor-rota")]
+        public async Task<IActionResult> GetMelhorRota([FromQuery] string origem, [FromQuery] string destino)
+        {
+            if (string.IsNullOrWhiteSpace(origem) || string.IsNullOrWhiteSpace(destino))
+                return BadRequest("Origem e destino devem ser informados.");
 
-        //    return BadRequest(new
-        //    {
-        //        success = false,
-        //        errors = _notificador.ObterNotificacoes().Select(n => n.Mensagem)
-        //    });
-        //}
+            var resultado = await _rotaApp.BuscarMelhorRota(origem, destino);
+            return Ok(resultado);
+        }
     }
 }

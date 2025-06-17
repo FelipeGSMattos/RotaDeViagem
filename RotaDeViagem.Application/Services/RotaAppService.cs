@@ -11,5 +11,10 @@ namespace RotaDeViagem.Application.Services
         {
             _rotaService = rotaService;
         }
+
+        public async Task<string> BuscarMelhorRota(string origem, string destino)
+        {
+             return await _rotaService.BuscarMelhorRota(origem, destino);
+        }
     }
 }
