@@ -87,13 +87,13 @@ namespace RotaDeViagem.API.Controllers
             return Ok("A Rota foi removida");           
         }
 
-        [HttpGet("melhor-rota")]
-        public async Task<IActionResult> GetMelhorRota([FromQuery] string origem, [FromQuery] string destino)
+        [HttpGet("rota-mais-barata")]
+        public async Task<IActionResult> GetMaisBarata([FromQuery] string origem, [FromQuery] string destino)
         {
             if (string.IsNullOrWhiteSpace(origem) || string.IsNullOrWhiteSpace(destino))
                 return BadRequest("Origem e destino devem ser informados.");
 
-            var resultado = await _rotaApp.BuscarMelhorRota(origem, destino);
+            var resultado = await _rotaApp.BuscarRotaMaisBarata(origem.ToUpper(), destino.ToUpper());
             return Ok(resultado);
         }
     }

@@ -4,6 +4,6 @@ namespace RotaDeViagem.Application.Interface
 {
     public interface IRotaAppService : IAppServiceBase<Rota>
     {
-        Task<string> BuscarMelhorRota(string origem, string destino);
+        Task<string> BuscarRotaMaisBarata(string origem, string destino);
     }
 }

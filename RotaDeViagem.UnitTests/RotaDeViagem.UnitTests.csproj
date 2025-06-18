@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
@@ -23,8 +24,11 @@
   <ItemGroup>
     <Folder Include="0 - Presentation\" />
     <Folder Include="1 - Application\" />
-    <Folder Include="2 - Domain\" />
     <Folder Include="3 - Infra\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RotaDeViagem.Infra.Data\RotaDeViagem.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
