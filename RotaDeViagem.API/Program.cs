@@ -13,7 +13,8 @@ builder.Services.AddSwaggerGen();
 
 // Configuração do DbContext com SQL Server
 builder.Services.AddDbContext<RotaDeViagemDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseInMemoryDatabase("RotaViagemDB"));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.ResolveDependencies();
