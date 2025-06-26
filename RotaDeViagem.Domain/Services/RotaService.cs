@@ -32,29 +32,29 @@ namespace RotaDeViagem.Domain.Services
             }
 
             // 3. Implementar o Algoritmo de Dijkstra
-            var distancias = new Dictionary<string, decimal>();
+            var valores = new Dictionary<string, decimal>();
             var noAnterior = new Dictionary<string, string>();
             var noNaoVisitado = new HashSet<string>();
 
-            // Inicializar distâncias
+            // Inicializar valores
             foreach (var rota in rotas)
             {
-                if (!distancias.ContainsKey(rota.Origem)) distancias[rota.Origem] = decimal.MaxValue;
-                if (!distancias.ContainsKey(rota.Destino)) distancias[rota.Destino] = decimal.MaxValue;
+                if (!valores.ContainsKey(rota.Origem)) valores[rota.Origem] = decimal.MaxValue;
+                if (!valores.ContainsKey(rota.Destino)) valores[rota.Destino] = decimal.MaxValue;
                 noNaoVisitado.Add(rota.Origem);
                 noNaoVisitado.Add(rota.Destino);
             }
 
-            distancias[origem] = 0;
+            valores[origem] = 0;
 
             while (noNaoVisitado.Any())
             {
                 var noAtual = noNaoVisitado
-                    .Where(node => distancias.ContainsKey(node))
-                    .OrderBy(node => distancias[node])
+                    .Where(node => valores.ContainsKey(node))
+                    .OrderBy(node => valores[node])
                     .FirstOrDefault();
 
-                if (noAtual == null || distancias[noAtual] == decimal.MaxValue) break; // Não há mais caminhos acessíveis
+                if (noAtual == null || valores[noAtual] == decimal.MaxValue) break; // Não há mais caminhos acessíveis
 
                 noNaoVisitado.Remove(noAtual);
 
@@ -62,10 +62,10 @@ namespace RotaDeViagem.Domain.Services
                 {
                     foreach (var vizinho in grafo[noAtual])
                     {
-                        var novaDistancia = distancias[noAtual] + vizinho.Value;
-                        if (novaDistancia < distancias[vizinho.Key])
+                        var novaDistancia = valores[noAtual] + vizinho.Value;
+                        if (novaDistancia < valores[vizinho.Key])
                         {
-                            distancias[vizinho.Key] = novaDistancia;
+                            valores[vizinho.Key] = novaDistancia;
                             noAnterior[vizinho.Key] = noAtual;
                         }
                     }
@@ -73,7 +73,7 @@ namespace RotaDeViagem.Domain.Services
             }
 
             // 4. Reconstruir o caminho
-            if (!distancias.ContainsKey(destino) || distancias[destino] == decimal.MaxValue)
+            if (!valores.ContainsKey(destino) || valores[destino] == decimal.MaxValue)
             {
                 return Task.FromResult($"Rota de {origem} para {destino} não encontrada.");
             }
@@ -89,7 +89,7 @@ namespace RotaDeViagem.Domain.Services
 
             var rotaFormatada = string.Join(" - ", caminho);
 
-            return Task.FromResult($"{rotaFormatada} ao custo de ${distancias[destino]}");
+            return Task.FromResult($"{rotaFormatada} ao custo de ${valores[destino]}");
         }
     }
 }
